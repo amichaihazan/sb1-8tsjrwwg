@@ -10,12 +10,14 @@ const playerColors = [
   'bg-blue-500',
   'bg-green-500', 
   'bg-orange-500',
-  'bg-purple-500'
+  'bg-purple-500',
+  'bg-red-500',
+  'bg-pink-500'
 ];
 
 const SetupScreen: React.FC<SetupScreenProps> = ({ onGameStart }) => {
   const [playerCount, setPlayerCount] = useState(2);
-  const [playerNames, setPlayerNames] = useState(['Player 1', 'Player 2', 'Player 3', 'Player 4']);
+  const [playerNames, setPlayerNames] = useState(['Player 1', 'Player 2', 'Player 3', 'Player 4', 'Player 5', 'Player 6']);
   const [editingPlayer, setEditingPlayer] = useState<number | null>(null);
   const [tempName, setTempName] = useState('');
 
@@ -55,7 +57,8 @@ const SetupScreen: React.FC<SetupScreenProps> = ({ onGameStart }) => {
     const players: Player[] = Array.from({ length: playerCount }, (_, index) => ({
       id: index,
       name: playerNames[index],
-      color: playerColors[index]
+      color: playerColors[index],
+      points: 0
     }));
     onGameStart(players);
   };
@@ -71,7 +74,7 @@ const SetupScreen: React.FC<SetupScreenProps> = ({ onGameStart }) => {
             <Timer className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Board Game Timer
+          Tahel Master Timer
           </h1>
         </div>
         <p className="text-gray-600 text-base">
@@ -98,8 +101,8 @@ const SetupScreen: React.FC<SetupScreenProps> = ({ onGameStart }) => {
               </button>
               <span className="w-8 text-center font-semibold text-lg">{playerCount}</span>
               <button
-                onClick={() => handlePlayerCountChange(Math.min(4, playerCount + 1))}
-                disabled={playerCount >= 4}
+                onClick={() => handlePlayerCountChange(Math.min(6, playerCount + 1))}
+                disabled={playerCount >= 6}
                 className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
               >
                 <Plus size={16} />
@@ -170,10 +173,11 @@ const SetupScreen: React.FC<SetupScreenProps> = ({ onGameStart }) => {
         <h3 className="text-lg font-semibold text-gray-800 mb-3">How It Works</h3>
         <ul className="space-y-2 text-gray-600 text-sm">
           <li>• Each player gets 60 seconds per turn</li>
-          <li>• Only one timer runs at a time</li>
+          <li>• Dual timer layout for face-to-face play</li>
           <li>• Tick sounds in the last 10 seconds</li>
           <li>• Special tone when time runs out</li>
           <li>• Auto-advance to next player</li>
+          <li>• Track winning points for each player</li>
         </ul>
       </div>
     </div>
